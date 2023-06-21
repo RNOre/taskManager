@@ -1,16 +1,27 @@
-import "./TaskItem.module.css";
+import classes from "./TaskItem.module.css";
 import React from "react";
 import {Button, Card} from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import {deleteTask} from "../../store/reducers/taskReducer.ts";
 
-const TaskItem:React.FC = () =>{
+interface ItaskItem {
+    id:string,
+    title:string,
+    deadline: string,
+    highPriority: boolean
+}
+const TaskItem:React.FC<ItaskItem> = ({id, deadline, highPriority, title}:ItaskItem) =>{
+
+    const dispatch = useDispatch();
+
     return(
-        <Card style={{ width: '18rem' }}>
+        <Card style={{ width: '18rem', cursor:"pointer" }} className={highPriority?classes.highPriority:""}>
             <Card.Body>
-                <Card.Title>Card Title</Card.Title>
+                <Card.Title>{title}</Card.Title>
                 <Card.Text>
-                    deadline: 23.03.2024
+                    deadline: {deadline}
                 </Card.Text>
-                <Button variant="primary">Done!</Button>
+                <Button variant="primary" onClick={()=>dispatch(deleteTask(id))}>Done!</Button>
             </Card.Body>
         </Card>
     )

@@ -1,0 +1,22 @@
+.monthPage{
+    margin-top: 50px;
+}
+
+.titleWrapper{
+    display: flex;
+}
+.title{
+    text-align: center;
+    flex: 1;
+}
+.taskGroupWrapper{
+    display: flex;
+}
+.monthTasks{
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 40px;
+    gap: 40px;
+}

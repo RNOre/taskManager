@@ -21,13 +21,13 @@ const Header: React.FC = () => {
                                 <Link to={"/main"} className={classes.link}>Main</Link>
                             </Nav.Link>
                             <Nav.Link>
-                                <Link to={"/main"} className={classes.link}>Day</Link>
+                                <Link to={"/day"} className={classes.link}>Day</Link>
                             </Nav.Link>
                             <Nav.Link>
-                                <Link to={"/main"} className={classes.link}>Week</Link>
+                                <Link to={"/week"} className={classes.link}>Week</Link>
                             </Nav.Link>
                             <Nav.Link>
-                                <Link to={"/main"} className={classes.link}>Month</Link>
+                                <Link to={"/month"} className={classes.link}>Month</Link>
                             </Nav.Link>
                         </Nav>
                         <Button variant="primary" onClick={() => setCreateModal(true)}>Add task</Button>

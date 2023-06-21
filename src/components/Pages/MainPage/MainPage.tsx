@@ -1,8 +1,12 @@
 import classes from "./MainPage.module.css";
 import TaskItem from "../../Task/TaskItem.tsx";
+import {useTypedSelector} from "../../../hooks/useTypedSelector.ts";
 
-const MainPage =()=>{
-    return(
+const MainPage = () => {
+
+    const state = useTypedSelector(state => state.tasks);
+
+    return (
         <div className={`container ${classes.mainPage}`}>
             <div className={classes.titleWrapper}>
                 <h1 className={classes.title}>
@@ -14,11 +18,14 @@ const MainPage =()=>{
             </div>
             <div className={classes.taskGroupWrapper}>
                 <div className={classes.allTasks}>
-                    <TaskItem/>
-                    <TaskItem/>
+                    {state.filter(state=>!state.highPriority).map(task=>
+                        <TaskItem key={task.id} id={task.id} title={task.title} highPriority={task.highPriority} deadline={task.deadline}/>
+                    )}
                 </div>
                 <div className={classes.topPriority}>
-                    <TaskItem/>
+                    {state.filter(state=>state.highPriority).map(task=>
+                        <TaskItem key={task.id} id={task.id} title={task.title} highPriority={task.highPriority} deadline={task.deadline}/>
+                    )}
                 </div>
             </div>
 
