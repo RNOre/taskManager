@@ -1,30 +1,29 @@
 import {ItaskState, TaskActions, TaskActionTypes} from "../../types/taskTypes.ts";
-import taskItem from "../../components/Task/TaskItem.tsx";
 
 const initialState: ItaskState = {
     tasks: [
         {
             id: "1",
             title: "task 1",
-            deadline: "2021-07-01",
+            deadline: "2023-06-24",
             highPriority: false
         },
         {
             id: "2",
             title: "task 2",
-            deadline: "",
+            deadline: "today",
             highPriority: false
         },
         {
             id: "3",
             title: "task 3",
-            deadline: "",
+            deadline: "today",
             highPriority: true
         },
         {
             id: "4",
             title: "task 4",
-            deadline: "",
+            deadline: "2023-06-29",
             highPriority: false
         },
     ]

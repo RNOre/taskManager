@@ -4,7 +4,7 @@ export interface ItaskState {
     tasks: Array<taskItem>
 }
 
-interface taskItem {
+export interface taskItem {
     id: string,
     title: string,
     deadline: string,

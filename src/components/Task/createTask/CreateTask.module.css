@@ -1,5 +1,7 @@
 .taskModal{
     position: relative;
+    /*overflow: hidden;*/
+
 }
 .background {
     width: 100%;

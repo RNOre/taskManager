@@ -1,26 +1,38 @@
 import classes from "./DayPage.module.css";
 import TaskItem from "../../Task/TaskItem.tsx";
-import {useTypedSelector} from "../../../hooks/useTypedSelector.ts";
+import {typeOfDate} from "../../../Service/DataService.ts";
+import {useEffect, useState} from "react";
 
-const DayPage =()=>{
+const DayPage = () => {
 
-    const state = useTypedSelector(state=>state.tasks);
+    useEffect(() => {
+        setTimeout(() => setLoading(false), 200)
+    }, [])
 
-    return(
+    const [loading, setLoading] = useState(true);
+
+
+    const state = typeOfDate("today")
+
+    return (
         <div className={`container ${classes.dayPage}`}>
-            <div className={classes.titleWrapper}>
-                <h1 className={classes.title}>
-                    Today`s tasks
-                </h1>
-            </div>
-            <div className={classes.taskGroupWrapper}>
-                <div className={classes.todayTasks}>
-                    {state.map(task=>
-                        <TaskItem key={task.id} id={task.id} title={task.title} highPriority={task.highPriority} deadline={task.deadline}/>
-                    )}
+            {loading ? <h1>Loading...</h1> :
+                <div>
+                    <div className={classes.titleWrapper}>
+                        <h1 className={classes.title}>
+                            Today`s tasks
+                        </h1>
+                    </div>
+                    <div className={classes.taskGroupWrapper}>
+                        <div className={classes.todayTasks}>
+                            {state.filter(task => task.deadline === "today").map(task =>
+                                <TaskItem key={task.id} id={task.id} title={task.title} highPriority={task.highPriority}
+                                          deadline={task.deadline}/>
+                            )}
+                        </div>
+                    </div>
                 </div>
-            </div>
-
+            }
         </div>
     )
 }
