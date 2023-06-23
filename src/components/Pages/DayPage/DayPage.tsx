@@ -10,8 +10,6 @@ const DayPage = () => {
     }, [])
 
     const [loading, setLoading] = useState(true);
-
-
     const state = typeOfDate("today")
 
     return (

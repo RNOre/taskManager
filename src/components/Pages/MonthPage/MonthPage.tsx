@@ -10,8 +10,8 @@ const MonthPage = () => {
     }, [])
 
     const [loading, setLoading] = useState(true);
-
     const state = typeOfDate("month");
+
     return (
         <div className={`container ${classes.monthPage}`}>
             {loading ? <h1>Loading...</h1> :

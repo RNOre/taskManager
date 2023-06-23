@@ -10,7 +10,6 @@ const MainPage = () => {
     }, [])
 
     const [loading, setLoading] = useState(true);
-
     const state = useTypedSelector(state => state.tasks);
 
     return (

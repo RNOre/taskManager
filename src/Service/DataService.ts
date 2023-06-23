@@ -1,5 +1,5 @@
 import parse from "date-fns/parse";
-import {compareDesc, endOfMonth, nextSunday} from "date-fns";
+import {compareDesc, endOfMonth, isDate, nextSunday} from "date-fns";
 import {useTypedSelector} from "../hooks/useTypedSelector.ts";
 import {taskItem} from "../types/taskTypes.ts";
 export const typeOfCreatedDate = (deadline:string):string => {
@@ -80,7 +80,9 @@ export const specCheck=(deadline:string)=>{
     let currentDate = new Date();
     currentDate = parse(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`, "yyyy-MM-dd", new Date());
     const date = parse(deadline, "yyyy-MM-dd", new Date());
+
     if(!compareDesc(date, currentDate)){
+
         return "today";
     }
     return compareDesc(date, currentDate) === -1;

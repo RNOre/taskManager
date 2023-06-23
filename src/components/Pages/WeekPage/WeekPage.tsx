@@ -10,8 +10,8 @@ const WeekPage = () => {
     }, [])
 
     const [loading, setLoading] = useState(true);
-
     const state = typeOfDate("week");
+
     return (
         <div className={`container ${classes.weekPage}`}>
             {loading ? <h1>Loading...</h1> :

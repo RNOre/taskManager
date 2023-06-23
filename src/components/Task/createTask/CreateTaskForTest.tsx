@@ -1,48 +1,26 @@
 import classes from "./CreateTask.module.css";
-import React, { useEffect, useState} from "react";
+import React, { useState} from "react";
 import {Button, Form, FormControl} from "react-bootstrap";
-import {useDispatch} from "react-redux";
-import {createNewTask} from "../../../store/reducers/taskReducer.ts";
-import {v4 as uuidv4} from 'uuid';
-import {specCheck, typeOfCreatedDate} from "../../../Service/DataService.ts";
+import {specCheck} from "../../../Service/DataService.ts";
 
 const CreateTask = (props: any) => {
-
-    const [loading, setLoading] = useState(false);
-    const [created, setCreated] = useState(false);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        // setLoading(true);
-        console.log("eff")
-        setTimeout(() => {
-                setLoading(false);
-                console.log("add")
-            }
-            , 2000)
-    }, [created])
 
     const [title, setTitle] = useState("");
     const [deadline, setDeadline] = useState("day");
     const [highPriority, setHighPriority] = useState(false)
 
+    const [message, setMessage] = useState("")
+
     const [datePickerToogle, setDatePickerToogle] = useState(true);
 
     const changeDeadline = (event: React.ChangeEvent<HTMLSelectElement>) => {
         event.target.value === "specific" ? setDatePickerToogle(false) : setDatePickerToogle(true);
-        setDeadline(event.target.value);
-        console.log(deadline)
-        // if (event.target.value !== "specific") {
-        //     console.log(event.target.value)
-        //     setDeadline(event.target.value)
-        //     setDatePickerToogle(false);
-        //     // setDeadline(event.target.value);
-        // } else {
-        //     console.log(event.target.value)
-        //     setDeadline(event.target.value)
-        //     setDatePickerToogle(true);
-        // }
-
+        if (event.target.value !== "specific") {
+            setDatePickerToogle(true);
+            setDeadline(event.target.value);
+        } else {
+            setDatePickerToogle(false);
+        }
     }
 
     const dateTest = (event: React.ChangeEvent<FormControlElement>) => {
@@ -50,29 +28,20 @@ const CreateTask = (props: any) => {
     }
 
     const createTask = () => {
-        console.log(deadline)
         if (!title.trim()) {
-            alert("Enter title!")
+            // alert("Enter title!")
+            setMessage("Enter title!");
             return;
         }
         if (!specCheck(deadline)) {
             alert("enter date must be bigger then current date")
             return;
         }
-        // if (specCheck(deadline) === "today") {
-        //     dispatch(createNewTask({id: uuidv4(), title: title.trim(), deadline: "today", highPriority}));
-        //     setCreated(true);
-        //     props.closeModal();
-        // }
-        else {
-            console.log(deadline)
-            dispatch(createNewTask({
-                id: uuidv4(),
-                title: title.trim(),
-                deadline: typeOfCreatedDate(deadline),
-                highPriority
-            }));
-            setCreated(true);
+        if (specCheck(deadline) === "today") {
+            setMessage("Created");
+            props.closeModal();
+        } else {
+            setMessage("Created");
             props.closeModal();
         }
     }
@@ -80,8 +49,8 @@ const CreateTask = (props: any) => {
     return (
         <div className={classes.taskModal}>
             <div className={classes.background}/>
-            {loading ? <h1>Creating...</h1> :
                 <Form className={classes.form}>
+                    <h3>{message}</h3>
                     <svg onClick={() => props.closeModal()} xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                          fill="currentColor"
                          className={`bi bi-x-lg ${classes.closeButton}`} viewBox="0 0 16 16">
@@ -91,7 +60,11 @@ const CreateTask = (props: any) => {
                     <h1 className="mb-3">Add new task</h1>
                     <Form.Group className="mb-3" controlId="text">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" placeholder="Enter title" value={title}
+                        {/*<input type={"text"} placeholder="Enter title" value={title} id={"inputTitle"}*/}
+                        {/*       onChange={(event: React.ChangeEvent<FormControlElement>) => {*/}
+                        {/*           setTitle(event.target.value)*/}
+                        {/*       }}/>*/}
+                        <Form.Control type="text" placeholder="Enter title" value={title} id={"inputTitle"}
                                       onChange={(event: React.ChangeEvent<FormControlElement>) => {
                                           setTitle(event.target.value)
                                       }}/>
@@ -124,7 +97,6 @@ const CreateTask = (props: any) => {
                         Create
                     </Button>
                 </Form>
-            }
         </div>
     )
 }
