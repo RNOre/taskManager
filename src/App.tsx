@@ -5,6 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import MainPage from "./components/Pages/MainPage/MainPage.tsx";
 import WeekPage from "./components/Pages/WeekPage/WeekPage.tsx";
 import MonthPage from "./components/Pages/MonthPage/MonthPage.tsx";
+import VariableDatePage from "./components/Pages/VariableDatePage/VariableDatePage.tsx";
 function App() {
     return (
         <>
@@ -14,6 +15,7 @@ function App() {
                 <Route path={"/day"} element={ <DayPage/>}/>
                 <Route path={"/week"} element={ <WeekPage/>}/>
                 <Route path={"/month"} element={ <MonthPage/>}/>
+                <Route path={"/variableDate"} element={<VariableDatePage/>}/>
             </Routes>
         </>
     )

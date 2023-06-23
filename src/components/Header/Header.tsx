@@ -1,6 +1,6 @@
 import classes from "./Header.module.css"
 import React, {useState} from "react";
-import {Button, Container, Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import CreateTask from "../Task/createTask/CreateTask.tsx";
 import {Link} from "react-router-dom";
 
@@ -29,6 +29,29 @@ const Header: React.FC = () => {
                             <Nav.Link>
                                 <Link to={"/month"} className={classes.link}>Month</Link>
                             </Nav.Link>
+                            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                                <Form className={classes.dropdown}>
+                                    <Form.Group>
+                                        <FormControl type="date"/>
+                                        <Form.Text className="text-muted">
+                                            *First date
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <FormControl type="date"/>
+                                        <Form.Text className="text-muted">
+                                            *Second date
+                                        </Form.Text>
+                                    </Form.Group>
+                                </Form>
+                                <Nav.Link>
+                                    <Link to={"/variableDate"} className={classes.link}>
+                                        <Button variant="primary">
+                                            Find tasks
+                                        </Button>
+                                    </Link>
+                                </Nav.Link>
+                            </NavDropdown>
                         </Nav>
                         <Button variant="primary" onClick={() => setCreateModal(true)}>Add task</Button>
                     </Navbar.Collapse>
