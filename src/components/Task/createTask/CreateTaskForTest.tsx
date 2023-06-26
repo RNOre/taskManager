@@ -23,7 +23,7 @@ const CreateTask = (props: any) => {
         }
     }
 
-    const dateTest = (event: React.ChangeEvent<FormControlElement>) => {
+    const dateTest = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDeadline(event.target.value);
     }
 
@@ -65,7 +65,7 @@ const CreateTask = (props: any) => {
                         {/*           setTitle(event.target.value)*/}
                         {/*       }}/>*/}
                         <Form.Control type="text" placeholder="Enter title" value={title} id={"inputTitle"}
-                                      onChange={(event: React.ChangeEvent<FormControlElement>) => {
+                                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                           setTitle(event.target.value)
                                       }}/>
                     </Form.Group>

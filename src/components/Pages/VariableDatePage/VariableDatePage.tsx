@@ -2,19 +2,15 @@ import classes from "./VariableDatePage.module.css";
 import TaskItem from "../../Task/TaskItem.tsx";
 import {typeOfDate} from "../../../Service/DataService.ts";
 import React, {useEffect, useState} from "react";
-import {Button, Form, FormControl, Nav} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import taskItem from "../../Task/TaskItem.tsx";
+import { Form, FormControl} from "react-bootstrap";
 
 const VariableDatePage = () => {
 
 
 
 
-    const [firstDate, setFirstDate] = useState();
-    const [secondDate, setSecondDate] = useState();
-
-    const [tasks, setTasks] = useState(false);
+    const [firstDate, setFirstDate] = useState<string>();
+    const [secondDate, setSecondDate] = useState<string>();
 
     const [loading, setLoading] = useState(true);
     const state = typeOfDate("variable", firstDate, secondDate);
@@ -38,14 +34,14 @@ const VariableDatePage = () => {
                     <Form className={classes.dropdown}>
                         <Form.Group>
                             <FormControl type="date" value={firstDate}
-                                         onChange={(event: React.ChangeEvent<FormControlElement>) => setFirstDate(event.target.value)}/>
+                                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFirstDate(event.target.value)}/>
                             <Form.Text className="text-muted">
                                 *First date
                             </Form.Text>
                         </Form.Group>
                         <Form.Group>
                             <FormControl type="date" value={secondDate}
-                                         onChange={(event: React.ChangeEvent<FormControlElement>) => setSecondDate(event.target.value)}/>
+                                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSecondDate(event.target.value)}/>
                             <Form.Text className="text-muted">
                                 *Second date
                             </Form.Text>

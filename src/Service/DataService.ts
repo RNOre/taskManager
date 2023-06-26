@@ -1,10 +1,10 @@
 import parse from "date-fns/parse";
-import {compareDesc, endOfMonth, isDate, nextSunday} from "date-fns";
+import {compareDesc, endOfMonth, nextSunday} from "date-fns";
 import {useTypedSelector} from "../hooks/useTypedSelector.ts";
 import {taskItem} from "../types/taskTypes.ts";
 
 export const typeOfCreatedDate = (deadline: string): string => {
-    let dateForDispatch: string = "";
+    let dateForDispatch = "";
     const currentDate = new Date();
     const date = parse(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`, "yyyy-MM-dd", new Date());
     switch (deadline) {
@@ -25,7 +25,7 @@ export const typeOfCreatedDate = (deadline: string): string => {
     return dateForDispatch;
 }
 
-export const typeOfDate = (deadline: string, firstDate: string = "", secondDate: string = "") => {
+export const typeOfDate = (deadline: string, firstDate = "", secondDate = "") => {
     const tasks = useTypedSelector(state => state.tasks);
     let newTaskList: taskItem[] = [];
     switch (deadline) {
