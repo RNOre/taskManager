@@ -5,7 +5,7 @@ const initialState: ItaskState = {
         {
             id: "1",
             title: "task 1",
-            deadline: "2023-06-24",
+            deadline: "2023-06-27",
             highPriority: false
         },
         {
@@ -23,7 +23,7 @@ const initialState: ItaskState = {
         {
             id: "4",
             title: "task 4",
-            deadline: "2023-06-29",
+            deadline: "2023-07-01",
             highPriority: false
         },
     ]

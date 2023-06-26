@@ -23,7 +23,7 @@ const MonthPage = () => {
                     </div>
                     <div className={classes.taskGroupWrapper}>
                         <div className={classes.monthTasks}>
-                            {state.map(task =>
+                            {state.sort((a, b) => Number(b.highPriority) - Number(a.highPriority)).map(task =>
                                 <TaskItem key={task.id} id={task.id} title={task.title} highPriority={task.highPriority}
                                           deadline={task.deadline}/>
                             )}

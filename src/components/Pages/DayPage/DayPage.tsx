@@ -23,7 +23,7 @@ const DayPage = () => {
                     </div>
                     <div className={classes.taskGroupWrapper}>
                         <div className={classes.todayTasks}>
-                            {state.filter(task => task.deadline === "today").map(task =>
+                            {state.filter(task => task.deadline === "today").sort((a, b) => Number(b.highPriority) - Number(a.highPriority)).map(task =>
                                 <TaskItem key={task.id} id={task.id} title={task.title} highPriority={task.highPriority}
                                           deadline={task.deadline}/>
                             )}

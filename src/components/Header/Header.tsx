@@ -29,29 +29,9 @@ const Header: React.FC = () => {
                             <Nav.Link>
                                 <Link to={"/month"} className={classes.link}>Month</Link>
                             </Nav.Link>
-                            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                <Form className={classes.dropdown}>
-                                    <Form.Group>
-                                        <FormControl type="date"/>
-                                        <Form.Text className="text-muted">
-                                            *First date
-                                        </Form.Text>
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <FormControl type="date"/>
-                                        <Form.Text className="text-muted">
-                                            *Second date
-                                        </Form.Text>
-                                    </Form.Group>
-                                </Form>
-                                <Nav.Link>
-                                    <Link to={"/variableDate"} className={classes.link}>
-                                        <Button variant="primary">
-                                            Find tasks
-                                        </Button>
-                                    </Link>
-                                </Nav.Link>
-                            </NavDropdown>
+                            <Nav.Link>
+                                <Link to={"/variable"} className={classes.link}>For period</Link>
+                            </Nav.Link>
                         </Nav>
                         <Button variant="primary" onClick={() => setCreateModal(true)}>Add task</Button>
                     </Navbar.Collapse>

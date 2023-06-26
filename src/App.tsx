@@ -15,7 +15,7 @@ function App() {
                 <Route path={"/day"} element={ <DayPage/>}/>
                 <Route path={"/week"} element={ <WeekPage/>}/>
                 <Route path={"/month"} element={ <MonthPage/>}/>
-                <Route path={"/variableDate"} element={<VariableDatePage/>}/>
+                <Route path={"/variable"} element={<VariableDatePage/>}/>
             </Routes>
         </>
     )
