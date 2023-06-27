@@ -39,10 +39,10 @@ const CreateTask = (props: any) => {
         }
         if (specCheck(deadline) === "today") {
             setMessage("Created");
-            props.closeModal();
+            // props.closeModal();
         } else {
             setMessage("Created");
-            props.closeModal();
+            // props.closeModal();
         }
     }
 
@@ -79,7 +79,6 @@ const CreateTask = (props: any) => {
                             <option value="specific">specific date</option>
                         </Form.Select>
                     </Form.Group>
-
                     <Form.Group className="mb-3">
                         <FormControl disabled={datePickerToogle} type="date" value={deadline} onChange={dateTest}/>
                         {/*<FormControl disabled={datePickerToogle} type="date" value={deadline} onChange={(event: React.ChangeEvent<FormControlElement>)=>{setDeadline(event.target.value)}}/>*/}

@@ -10,6 +10,8 @@ const CreateTask = (props: any) => {
 
     const [loading, setLoading] = useState(false);
     const [created, setCreated] = useState(false);
+    const [titleError, setTittleError] = useState(false);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -25,24 +27,14 @@ const CreateTask = (props: any) => {
     const [title, setTitle] = useState("");
     const [deadline, setDeadline] = useState("day");
     const [highPriority, setHighPriority] = useState(false)
-
     const [datePickerToogle, setDatePickerToogle] = useState(true);
 
+    useEffect(()=>{
+        title.trim()===""?setTittleError(true):setTittleError(false);
+    }, [title]);
     const changeDeadline = (event: React.ChangeEvent<HTMLSelectElement>) => {
         event.target.value === "specific" ? setDatePickerToogle(false) : setDatePickerToogle(true);
         setDeadline(event.target.value);
-        console.log(deadline)
-        // if (event.target.value !== "specific") {
-        //     console.log(event.target.value)
-        //     setDeadline(event.target.value)
-        //     setDatePickerToogle(false);
-        //     // setDeadline(event.target.value);
-        // } else {
-        //     console.log(event.target.value)
-        //     setDeadline(event.target.value)
-        //     setDatePickerToogle(true);
-        // }
-
     }
 
     const dateTest = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,11 +51,6 @@ const CreateTask = (props: any) => {
             alert("enter date must be bigger then current date")
             return;
         }
-        // if (specCheck(deadline) === "today") {
-        //     dispatch(createNewTask({id: uuidv4(), title: title.trim(), deadline: "today", highPriority}));
-        //     setCreated(true);
-        //     props.closeModal();
-        // }
         else {
             console.log(deadline)
             dispatch(createNewTask({
@@ -95,6 +82,12 @@ const CreateTask = (props: any) => {
                                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                           setTitle(event.target.value)
                                       }}/>
+                        {
+                            titleError?
+                                <Form.Text className = "text-muted">
+                                    *Title must contain at least one character
+                                </Form.Text>:<></>
+                        }
                     </Form.Group>
 
                     <Form.Group className="mb-3">
@@ -120,7 +113,7 @@ const CreateTask = (props: any) => {
                                         setHighPriority(event.target.checked)
                                     }}/>
                     </Form.Group>
-                    <Button variant="primary" onClick={createTask}>
+                    <Button variant="primary" onClick={createTask} disabled={titleError}>
                         Create
                     </Button>
                 </Form>
