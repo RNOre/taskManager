@@ -1,30 +1,15 @@
 import classes from "./CreateTask.module.css";
 import React, { useEffect, useState} from "react";
 import {Button, Form, FormControl} from "react-bootstrap";
-import {useDispatch} from "react-redux";
-import {createNewTask} from "../../../store/reducers/taskReducer.ts";
-import {v4 as uuidv4} from 'uuid';
-import {specCheck, typeOfCreatedDate} from "../../../Service/DataService.ts";
+import {specCheck} from "../../../Service/DataService.ts";
 
 const CreateTask = (props: any) => {
 
-    const [loading, setLoading] = useState(false);
-    const [created, setCreated] = useState(false);
+      const [created, setCreated] = useState(false);
     const [titleError, setTittleError] = useState(false);
     const [dateError, setDateError] = useState(false);
     const [dateErrorMessage, setDateErrorMessage] = useState("");
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        // setLoading(true);
-        console.log("eff")
-        setTimeout(() => {
-                setLoading(false);
-                console.log("add")
-            }
-            , 2000)
-    }, [created])
 
     const [title, setTitle] = useState("");
     const [deadline, setDeadline] = useState("day");
@@ -65,20 +50,12 @@ const CreateTask = (props: any) => {
     }
 
     const createTask = () => {
-            dispatch(createNewTask({
-                id: uuidv4(),
-                title: title.trim(),
-                deadline: typeOfCreatedDate(deadline),
-                highPriority
-            }));
-            setCreated(true);
-            props.closeModal();
+        setCreated(true);
     }
 
     return (
         <div className={classes.taskModal}>
             <div className={classes.background}/>
-            {loading ? <h1>Creating...</h1> :
                 <Form className={classes.form}>
                     <svg onClick={() => props.closeModal()} xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                          fill="currentColor"
@@ -102,8 +79,8 @@ const CreateTask = (props: any) => {
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <Form.Label>Deadline</Form.Label>
-                        <Form.Select onChange={changeDeadline}>
+                        <Form.Label htmlFor={"deadline"}>Deadline</Form.Label>
+                        <Form.Select onChange={changeDeadline} name={"deadline"} id={"deadline"}>
                             <option value="day">for a day</option>
                             <option value="week">for a week</option>
                             <option value="month">for a month</option>
@@ -112,8 +89,8 @@ const CreateTask = (props: any) => {
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <FormControl disabled={datePickerToogle} type="date" value={deadline} onChange={dateTest}/>
-                        {/*<FormControl disabled={datePickerToogle} type="date" value={deadline} onChange={(event: React.ChangeEvent<FormControlElement>)=>{setDeadline(event.target.value)}}/>*/}
+                        <FormControl disabled={datePickerToogle} type="date" value={deadline}
+                                     data-testid={"calendar"}  onChange={dateTest}/>
                         {(deadline==="day"||deadline==="week"||deadline==="month")?
                             <Form.Text className="text-muted">
                                 *Available for specific date
@@ -134,7 +111,6 @@ const CreateTask = (props: any) => {
                         Create
                     </Button>
                 </Form>
-            }
         </div>
     )
 }
