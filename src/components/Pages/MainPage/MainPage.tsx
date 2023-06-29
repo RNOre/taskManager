@@ -2,15 +2,21 @@ import classes from "./MainPage.module.css";
 import TaskItem from "../../Task/TaskItem.tsx";
 import {useTypedSelector} from "../../../hooks/useTypedSelector.ts";
 import {useEffect, useState} from "react";
+import DragModal from "./Modal/DragModal.tsx";
 
 const MainPage = () => {
 
     useEffect(() => {
-        setTimeout(()=>setLoading(false), 200)
+        setTimeout(() => setLoading(false), 200)
     }, [])
 
     const [loading, setLoading] = useState(true);
     const state = useTypedSelector(state => state.tasks);
+
+    const [tasks, setTasks] = useState(state);
+    const [currentBoard, setCurrentBoard] = useState(null);
+    const [currentItem, setCurrentItem] = useState(null);
+    const [dragModal, setDragModal] = useState(false);
 
     return (
         <div className={`container ${classes.mainPage}`}>
@@ -26,14 +32,26 @@ const MainPage = () => {
                     </div>
                     <div className={classes.taskGroupWrapper}>
                         <div className={classes.allTasks}>
-                            {state.filter(state => !state.highPriority).map(task =>
-                                <TaskItem key={task.id} id={task.id} title={task.title} highPriority={task.highPriority}
+                            {dragModal ?
+                                <DragModal gold={false}/> : <></>}
+                            {tasks.filter(state => !state.highPriority).map(task =>
+                                <TaskItem currentBoard={currentBoard} currentItem={currentItem}
+                                          setTasks={() => setTasks} onDragModal = {()=>setDragModal(true)}  offDragModal = {()=>setDragModal(false)}
+                                          setCurrentBoard={() => setCurrentBoard} setCurrentItem={() => setCurrentItem}
+                                          item={task} tasks={tasks} key={task.id} id={task.id} title={task.title}
+                                          highPriority={task.highPriority}
                                           deadline={task.deadline}/>
                             )}
                         </div>
                         <div className={classes.topPriority}>
-                            {state.filter(state => state.highPriority).map(task =>
-                                <TaskItem key={task.id} id={task.id} title={task.title} highPriority={task.highPriority}
+                            {dragModal ?
+                                <DragModal gold={true}/> : <></>}
+                            {tasks.filter(state => state.highPriority).map(task =>
+                                <TaskItem currentBoard={currentBoard} currentItem={currentItem}
+                                          setTasks={() => setTasks} onDragModal = {()=>setDragModal(true)}  offDragModal = {()=>setDragModal(false)}
+                                          setCurrentBoard={() => setCurrentBoard} setCurrentItem={() => setCurrentItem}
+                                          item={task} tasks={tasks} key={task.id} id={task.id} title={task.title}
+                                          highPriority={task.highPriority}
                                           deadline={task.deadline}/>
                             )}
                         </div>

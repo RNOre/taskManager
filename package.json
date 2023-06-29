@@ -12,17 +12,20 @@
   },
   "dependencies": {
     "@types/react-redux": "^7.1.25",
+    "ant": "^0.2.0",
     "bootstrap": "^5.3.0",
     "bootstrap-icons": "^1.10.5",
     "date-fns": "^2.30.0",
     "happy-dom": "^9.20.3",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.0",
     "react-router-dom": "^6.13.0",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
+    "styled-component": "^2.8.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -31,6 +34,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.37",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "@types/react-dom": "^18.0.11",
     "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
