@@ -13,10 +13,9 @@ const MainPage = () => {
     const [loading, setLoading] = useState(true);
     const state = useTypedSelector(state => state.tasks);
 
-    const [tasks, setTasks] = useState(state);
-    const [currentBoard, setCurrentBoard] = useState(null);
-    const [currentItem, setCurrentItem] = useState(null);
+    const [currentItem, setCurrentItem] = useState("");
     const [dragModal, setDragModal] = useState(false);
+    const [goldDragModal, setGoldDragModal] = useState(false);
 
     return (
         <div className={`container ${classes.mainPage}`}>
@@ -33,24 +32,20 @@ const MainPage = () => {
                     <div className={classes.taskGroupWrapper}>
                         <div className={classes.allTasks}>
                             {dragModal ?
-                                <DragModal gold={false}/> : <></>}
-                            {tasks.filter(state => !state.highPriority).map(task =>
-                                <TaskItem currentBoard={currentBoard} currentItem={currentItem}
-                                          setTasks={() => setTasks} onDragModal = {()=>setDragModal(true)}  offDragModal = {()=>setDragModal(false)}
-                                          setCurrentBoard={() => setCurrentBoard} setCurrentItem={() => setCurrentItem}
-                                          item={task} tasks={tasks} key={task.id} id={task.id} title={task.title}
+                                <DragModal currentId={currentItem} gold={false}  closeDragModal = {()=>setGoldDragModal(false)}/> : <></>}
+                            {state.filter(state => !state.highPriority).map(task =>
+                                <TaskItem setModal={setGoldDragModal} setCurrentItem={setCurrentItem}
+                                          key={task.id} id={task.id} title={task.title}
                                           highPriority={task.highPriority}
                                           deadline={task.deadline}/>
                             )}
                         </div>
                         <div className={classes.topPriority}>
-                            {dragModal ?
-                                <DragModal gold={true}/> : <></>}
-                            {tasks.filter(state => state.highPriority).map(task =>
-                                <TaskItem currentBoard={currentBoard} currentItem={currentItem}
-                                          setTasks={() => setTasks} onDragModal = {()=>setDragModal(true)}  offDragModal = {()=>setDragModal(false)}
-                                          setCurrentBoard={() => setCurrentBoard} setCurrentItem={() => setCurrentItem}
-                                          item={task} tasks={tasks} key={task.id} id={task.id} title={task.title}
+                            {goldDragModal ?
+                                <DragModal currentId={currentItem} gold={true} closeDragModal = {()=>setDragModal(false)}/> : <></>}
+                            {state.filter(state => state.highPriority).map(task =>
+                                <TaskItem setModal={setDragModal} setCurrentItem={setCurrentItem}
+                                          key={task.id} id={task.id} title={task.title}
                                           highPriority={task.highPriority}
                                           deadline={task.deadline}/>
                             )}

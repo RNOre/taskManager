@@ -30,7 +30,7 @@ test("disabled btn without title", ()=>{
     const createBtn = screen.getByText('Create');
     const errorMessage = screen.getByText("*Title must contain at least one character");
 
-    fireEvent.change(inputTitle, {target:{value:''}})
+    fireEvent.change(inputTitle, {target:{value:'       '}})
 
     expect(errorMessage).toBeInTheDocument();
     expect(createBtn).toBeDisabled();

@@ -31,18 +31,29 @@ const initialState: ItaskState = {
 
 export const taskReducer = (state = initialState, action: TaskActions): ItaskState => {
     switch (action.type) {
-        case TaskActionTypes.CREATE_NEW_TASKS:
-            console.log(action.payload);
+        case TaskActionTypes.CREATE_NEW_TASKS: {
             const newTask = action.payload;
             return {...state, tasks: [...state.tasks, newTask]};
-        case TaskActionTypes.DELETE_TASK:
-            console.log(action.payload);
-            const newTasks = state.tasks.filter(task=>task.id!==action.payload);
+        }
+        case TaskActionTypes.DELETE_TASK: {
+            const newTasks = state.tasks.filter(task => task.id !== action.payload);
             return {...state, tasks: newTasks};
-        default:
+        }
+        case TaskActionTypes.CHANGE_PRIORITY: {
+            console.log(action.payload);
+            for (const task of state.tasks) {
+                if (task.id === action.payload) {
+                    task.highPriority = !task.highPriority
+                }
+            }
+            return {...state}
+        }
+        default: {
             return state;
+        }
     }
 }
 
 export const createNewTask = (payload: any) => ({type: TaskActionTypes.CREATE_NEW_TASKS, payload})
 export const deleteTask = (payload: string) => ({type: TaskActionTypes.DELETE_TASK, payload})
+export const changePriority = (payload: string) =>({type:TaskActionTypes.CHANGE_PRIORITY, payload})

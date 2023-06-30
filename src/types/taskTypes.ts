@@ -13,7 +13,8 @@ export interface taskItem {
 
 export const enum TaskActionTypes {
     CREATE_NEW_TASKS = "CREATE_NEW_TASKS",
-    DELETE_TASK = "DELETE_TASK"
+    DELETE_TASK = "DELETE_TASK",
+    CHANGE_PRIORITY = "CHANGE_PRIORITY",
 }
 
 interface createNewTask {
@@ -23,9 +24,14 @@ interface createNewTask {
 
 interface deleteTask {
     type: TaskActionTypes.DELETE_TASK
-    payload:string
+    payload: string
+}
+
+interface changePriority {
+    type: TaskActionTypes.CHANGE_PRIORITY
+    payload: string
 }
 
 export type RootState = ReturnType<typeof taskReducer>
 
-export type TaskActions = createNewTask|deleteTask;
+export type TaskActions = createNewTask | deleteTask| changePriority;

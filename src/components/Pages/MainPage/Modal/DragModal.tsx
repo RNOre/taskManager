@@ -1,10 +1,30 @@
 import classes from "./DragModal.module.css"
+import {useDispatch} from "react-redux";
+import {changePriority} from "../../../../store/reducers/taskReducer.ts";
 
-const DragModal = (props:any)=>{
+interface IDragModal {
+    currentId: string,
+    gold: boolean
+    closeDragModal: () => void
+}
 
-    return(
-        <div draggable={true} onDragLeave={(event)=>{console.log(event)}} className={` ${classes.modal} ${props.gold?classes.gold:""} Dragmodal`}>
+const DragModal = ({currentId, gold, closeDragModal}:IDragModal) => {
 
+
+    const dispatch = useDispatch();
+
+    function dragLeaveHandler(e) {
+        if (e.target.className.includes("gold")) {
+            dispatch(changePriority(currentId));
+        } else if (e.target.className.includes("grey")) {
+            dispatch(changePriority(currentId))
+        }
+        closeDragModal();
+    }
+
+    return (
+        <div draggable={true} className={` ${classes.modal} ${gold ? classes.gold : " grey"} Dragmodal`}
+             onDragLeave={(e) => dragLeaveHandler(e)}>
         </div>
     )
 }

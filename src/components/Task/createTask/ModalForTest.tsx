@@ -5,7 +5,7 @@ import {specCheck} from "../../../Service/DataService.ts";
 
 const CreateTask = (props: any) => {
 
-      const [created, setCreated] = useState(false);
+      const [, setCreated] = useState(false);
     const [titleError, setTittleError] = useState(false);
     const [dateError, setDateError] = useState(false);
     const [dateErrorMessage, setDateErrorMessage] = useState("");

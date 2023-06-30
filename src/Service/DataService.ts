@@ -27,12 +27,12 @@ export const typeOfCreatedDate = (deadline: string): string => {
 
 export const typeOfDate = (deadline: string, firstDate = "", secondDate = "") => {
     const tasks = useTypedSelector(state => state.tasks);
-    let newTaskList: taskItem[] = [];
+    const newTaskList: taskItem[] = [];
     switch (deadline) {
         case "today":
             return tasks.filter(task => task.deadline === "today");
         case "week":
-            for (let task of tasks) {
+            for (const task of tasks) {
                 if (task.deadline === "today") {
                     newTaskList.push(task);
                 } else {
@@ -43,7 +43,7 @@ export const typeOfDate = (deadline: string, firstDate = "", secondDate = "") =>
             }
             return newTaskList;
         case "month":
-            for (let task of tasks) {
+            for (const task of tasks) {
                 if (task.deadline === "today") {
                     newTaskList.push(task);
                 } else if (calcDate("month", task.deadline)) {
@@ -52,7 +52,7 @@ export const typeOfDate = (deadline: string, firstDate = "", secondDate = "") =>
             }
             return newTaskList;
         case "variable":
-            for (let task of tasks) {
+            for (const task of tasks) {
                 if (calcDate("variable", task.deadline, firstDate, secondDate)) {
                     newTaskList.push(task)
                 }
@@ -95,4 +95,14 @@ export const specCheck = (deadline: string) => {
         return "today";
     }
     return compareDesc(date, currentDate) === -1;
+}
+
+export const checkVariable = (firstDate: string | undefined, secondDate: string | undefined) => {
+    if (typeof firstDate !== "undefined" && typeof secondDate !== "undefined") {
+        const firstDateTD = parse(firstDate, "yyyy-MM-dd", new Date());
+        const secondDateTD = parse(secondDate, "yyyy-MM-dd", new Date());
+        return compareDesc(firstDateTD, secondDateTD) === -1
+    } else {
+        return 1;
+    }
 }
