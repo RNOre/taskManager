@@ -10,4 +10,11 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: './src/components/Task/createTask/CreateTask.test.tsx',
   },
+  server: {
+    host: true,
+    port: 8000,
+    watch: {
+      usePolling: true
+    }
+  }
 })
